@@ -1,0 +1,91 @@
+/* Reset default browser styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #ffdde1, #ee9ca7);
+  color: #333;
+  text-align: center;
+  padding: 60px 20px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.5rem;
+  color: #ff4d88;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+  color: #333;
+}
+
+input[type="text"],
+input[type="file"],
+button {
+  padding: 12px 16px;
+  margin: 10px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+input[type="text"],
+input[type="file"] {
+  border: 2px solid #ffb3c6;
+  background-color: #fff;
+  width: 80%;
+  max-width: 400px;
+}
+
+button {
+  background-color: #ff6b81;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #ff4d6d;
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+@media (max-width: 500px) {
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  input, button {
+    font-size: 0.9rem;
+    width: 90%;
+  }
+}
+
+#chatContainer {
+  margin-top: 40px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
+#chatContainer p {
+  background: rgba(255,255,255,0.6);
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
