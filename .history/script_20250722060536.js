@@ -11,8 +11,7 @@ async function sendMessage() {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + process.env.OPENAI_API_KEY
-   // Replace in Vercel env
+      'Authorization': 'Bearer YOUR_API_KEY' // Replace in Vercel env
     },
     body: JSON.stringify({
       model: 'gpt-3.5-turbo',
