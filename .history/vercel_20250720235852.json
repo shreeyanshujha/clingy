@@ -1,0 +1,8 @@
+{
+  "functions": {
+    "api/clingy.js": {
+      "runtime": "edge"
+    }
+  }
+}
+    
