@@ -28,9 +28,3 @@ async function sendMessage() {
     appendMessage("Clingy", "Ughh... I think something broke 💔");
   }
 }
-document.getElementById("userInput").addEventListener("keypress", function (e) {
-  if (e.key === "Enter") {
-    e.preventDefault();
-    sendMessage();
-  }
-});
