@@ -1,7 +1,10 @@
+import { sendMessageToAPI } from './clingy.js';
+
 const userInput = document.getElementById('user-input');
 const sendBtn = document.getElementById('send-btn');
 const chatContainer = document.getElementById('chat-container');
 
+// Enter key triggers send
 userInput.addEventListener('keypress', function (e) {
   if (e.key === 'Enter') {
     e.preventDefault();
@@ -9,8 +12,10 @@ userInput.addEventListener('keypress', function (e) {
   }
 });
 
+// Button click triggers send
 sendBtn.addEventListener('click', sendMessage);
 
+// Send message and handle response
 async function sendMessage() {
   const message = userInput.value.trim();
   if (!message) return;
@@ -19,24 +24,15 @@ async function sendMessage() {
   userInput.value = '';
 
   try {
-    const res = await fetch('/api/clingy', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ message })
-    });
-
-    if (!res.ok) throw new Error('API error');
-
-    const data = await res.json();
-    appendMessage('Clingy', data.reply);
+    const reply = await sendMessageToAPI(message);
+    appendMessage('Clingy', reply);
   } catch (err) {
     appendMessage('Clingy', "Babe I'm not feeling too well rn (Server error 🥺)");
     console.error(err);
   }
 }
 
+// Append message to chat
 function appendMessage(sender, message) {
   const messageEl = document.createElement('div');
   messageEl.classList.add('message');
