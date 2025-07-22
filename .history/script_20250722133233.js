@@ -1,10 +1,8 @@
-import { sendMessageToAPI } from './clingy.js';
-
 const userInput = document.getElementById('user-input');
 const sendBtn = document.getElementById('send-btn');
 const chatContainer = document.getElementById('chat-container');
 
-// Enter key triggers send
+// Listen for Enter key
 userInput.addEventListener('keypress', function (e) {
   if (e.key === 'Enter') {
     e.preventDefault();
@@ -12,27 +10,38 @@ userInput.addEventListener('keypress', function (e) {
   }
 });
 
-// Button click triggers send
+// Listen for Send button
 sendBtn.addEventListener('click', sendMessage);
 
-// Send message and handle response
+// Function to send the message
 async function sendMessage() {
   const message = userInput.value.trim();
   if (!message) return;
 
+  // Append user message to chat
   appendMessage('You', message);
   userInput.value = '';
 
   try {
-    const reply = await sendMessageToAPI(message);
-    appendMessage('Clingy', reply);
+    const res = await fetch('/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ message })
+    });
+
+    if (!res.ok) throw new Error('API error');
+
+    const data = await res.json();
+    appendMessage('Clingy', data.reply);
   } catch (err) {
     appendMessage('Clingy', "Babe I'm not feeling too well rn (Server error 🥺)");
     console.error(err);
   }
 }
 
-// Append message to chat
+// Function to add messages to chat
 function appendMessage(sender, message) {
   const messageEl = document.createElement('div');
   messageEl.classList.add('message');
@@ -44,5 +53,5 @@ function appendMessage(sender, message) {
   `;
   messageEl.innerHTML = bubble;
   chatContainer.appendChild(messageEl);
-  chatContainer.scrollTop = chatContainer.scrollHeight;
+  chatContainer.scrollTop = chatContainer.scrollHeight; // auto-scroll
 }
